@@ -8,7 +8,7 @@ Live site: https://noraworld.github.io/semantic-satiation-generator/
 
 ## Demo
 
-Placeholder: add screenshots here.
+![English demo screenshot](../screenshots/demo_en.png)
 
 ## Features
 

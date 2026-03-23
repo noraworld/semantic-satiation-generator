@@ -8,7 +8,7 @@ Semantic Satiation Generator は、同じ単語や短いフレーズを画面い
 
 ## デモ
 
-プレースホルダー: ここにスクリーンショットを追加してください。
+![日本語デモのスクリーンショット](../screenshots/demo_ja.png)
 
 ## 機能
 
