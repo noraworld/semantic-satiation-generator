@@ -161,6 +161,8 @@ backButton.addEventListener("click", () => {
   phraseInput.focus();
 });
 
+phraseInput.addEventListener("input", updatePreview);
+
 Object.values(controls).forEach((control) => {
   control.addEventListener("input", syncStateFromControls);
 });
