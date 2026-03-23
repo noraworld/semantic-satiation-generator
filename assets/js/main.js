@@ -73,22 +73,17 @@ function syncStateFromControls() {
 }
 
 function measurePatternCell(phrase) {
-  const canvas = document.createElement("canvas");
-  const context = canvas.getContext("2d");
-  const computedPatternStyle = window.getComputedStyle(pattern);
-  const font = [
-    computedPatternStyle.fontStyle,
-    computedPatternStyle.fontVariant,
-    computedPatternStyle.fontWeight,
-    computedPatternStyle.fontSize,
-    computedPatternStyle.fontFamily,
-  ].join(" ");
+  const probe = document.createElement("span");
+  probe.className = "pattern__item";
+  probe.textContent = phrase;
+  probe.style.visibility = "hidden";
+  probe.style.left = "0";
+  probe.style.top = "0";
+  pattern.appendChild(probe);
 
-  context.font = font;
-
-  const metrics = context.measureText(phrase);
-  const width = Math.ceil(metrics.width);
-  const height = Math.ceil(Number(controls.fontSize.value) * 0.92);
+  const width = Math.ceil(probe.getBoundingClientRect().width);
+  const height = Math.ceil(probe.getBoundingClientRect().height);
+  probe.remove();
 
   return { width, height };
 }
