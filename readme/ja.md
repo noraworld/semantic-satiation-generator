@@ -4,6 +4,8 @@
 
 Semantic Satiation Generator は、同じ単語や短いフレーズを画面いっぱいに繰り返し表示することで、意味飽和を手軽に体験できるシンプルな静的サイトです。
 
+公開ページ: https://noraworld.github.io/semantic-satiation-generator/
+
 ## デモ
 
 プレースホルダー: ここにスクリーンショットを追加してください。
@@ -15,36 +17,8 @@ Semantic Satiation Generator は、同じ単語や短いフレーズを画面い
 - 文字色、背景色、フォントを変更可能
 - 全画面表示前にライブプレビューを確認可能
 - ブラウザ言語判定と手動切替に対応した英語・日本語 UI
-- HTML / CSS / JavaScript のみで構成され、GitHub Pages で公開しやすい
-
-## ディレクトリ構成
-
-```text
-.
-├── README.md -> readme/en.md
-├── assets/
-│   ├── css/
-│   │   └── style.css
-│   └── js/
-│       └── main.js
-├── index.html
-└── readme/
-    ├── en.md
-    └── ja.md
-```
-
-## 使い方
-
-1. ブラウザで `index.html` を開くか、GitHub Pages で公開します。
-2. 単語またはフレーズを入力します。
-3. 必要に応じて見た目を調整します。
-4. `画面いっぱいに表示` を押すか Enter を押します。
-5. `×` ボタンまたは `Esc` で入力画面に戻れます。
-
-## 公開
-
-このプロジェクトはプレーンな静的サイトです。GitHub Pages では `main` ブランチのルートを配信対象にすれば公開できます。
+- HTML / CSS / JavaScript のみで構成
 
 ## ライセンス
 
-必要なライセンス表記をここに追記してください。
+リポジトリルートの `LICENSE` を参照してください。
