@@ -208,16 +208,26 @@ output {
 }
 
 .panel-display {
-  position: relative;
-  overflow: hidden;
+  display: none;
+  grid-template-rows: auto 1fr;
+  overflow: clip;
   background: var(--bg);
 }
 
+.panel-display.is-active {
+  display: grid;
+}
+
+.display-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px 20px 0;
+}
+
 .floating-button {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 2;
+  position: relative;
+  z-index: 1;
   appearance: none;
   border: 0;
   border-radius: 999px;
@@ -230,11 +240,15 @@ output {
 
 .pattern {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(calc(var(--font-size) * 2.2), 1fr));
+  grid-template-columns: repeat(var(--pattern-columns, 1), minmax(0, 1fr));
+  grid-template-rows: repeat(var(--pattern-rows, 1), minmax(0, 1fr));
   align-items: center;
-  gap: calc(var(--word-gap) * 0.7);
-  min-height: 100vh;
-  padding: 32px;
+  justify-items: center;
+  gap: var(--pattern-gap, 24px);
+  height: 100%;
+  min-height: 0;
+  padding: 20px;
+  overflow: hidden;
 }
 
 .pattern__item {
@@ -247,6 +261,7 @@ output {
   line-height: 0.92;
   text-align: center;
   white-space: nowrap;
+  max-width: 100%;
 }
 
 @media (max-width: 760px) {
@@ -260,12 +275,10 @@ output {
   }
 
   .pattern {
-    grid-template-columns: repeat(auto-fit, minmax(calc(var(--font-size) * 1.8), 1fr));
-    padding: 72px 16px 24px;
+    padding: 16px;
   }
 
-  .floating-button {
-    top: 14px;
-    right: 14px;
+  .display-header {
+    padding: 14px 14px 0;
   }
 }

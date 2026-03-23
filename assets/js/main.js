@@ -5,6 +5,7 @@ const phraseInput = document.getElementById("phrase");
 const previewSample = document.getElementById("preview-sample");
 const pattern = document.getElementById("pattern");
 const backButton = document.getElementById("back-button");
+const displayHeader = document.querySelector(".display-header");
 
 const controls = {
   fontSize: document.getElementById("font-size"),
@@ -75,11 +76,25 @@ function syncStateFromControls() {
 function createPatternItems(phrase) {
   pattern.innerHTML = "";
 
-  const estimatedItemWidth = Math.max(Number(controls.fontSize.value) * (phrase.length + 1.4), 120);
-  const columns = Math.max(Math.floor(window.innerWidth / estimatedItemWidth), 1);
-  const rowHeight = Number(controls.fontSize.value) * 1.2 + Number(controls.wordGap.value) * 0.7;
-  const rows = Math.max(Math.ceil(window.innerHeight / Math.max(rowHeight, 1)) + 2, 6);
+  const fontSize = Number(controls.fontSize.value);
+  const gap = Math.max(Number(controls.wordGap.value), 8);
+  const phraseWidthFactor = phrase.length <= 2 ? 1.6 : 1.2;
+  const estimatedItemWidth = Math.max(fontSize * (phrase.length * phraseWidthFactor), 120);
+  const estimatedItemHeight = Math.max(fontSize * 1.15, 48);
+  const horizontalUnit = estimatedItemWidth + gap;
+  const verticalUnit = estimatedItemHeight + gap;
+  const availableWidth = Math.max(pattern.clientWidth - 40, 1);
+  const availableHeight = Math.max(
+    window.innerHeight - displayHeader.getBoundingClientRect().height - 40,
+    1
+  );
+  const columns = Math.max(Math.floor((availableWidth + gap) / horizontalUnit), 1);
+  const rows = Math.max(Math.floor((availableHeight + gap) / verticalUnit), 1);
   const count = columns * rows;
+
+  pattern.style.setProperty("--pattern-columns", String(columns));
+  pattern.style.setProperty("--pattern-rows", String(rows));
+  pattern.style.setProperty("--pattern-gap", `${gap}px`);
 
   const fragment = document.createDocumentFragment();
 
@@ -110,8 +125,8 @@ form.addEventListener("submit", (event) => {
   }
 
   syncStateFromControls();
-  createPatternItems(phrase);
   showScreen("display");
+  createPatternItems(phrase);
 });
 
 backButton.addEventListener("click", () => {
