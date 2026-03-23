@@ -261,3 +261,4 @@ document.addEventListener("keydown", (event) => {
 
 applyLocale(detectLocale());
 syncStateFromControls();
+phraseInput.focus();
