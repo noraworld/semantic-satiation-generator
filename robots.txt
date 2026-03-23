@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://noraworld.github.io/semantic-satiation-generator/sitemap.xml
