@@ -77,7 +77,7 @@ const styleState = {
   fontSize: "56px",
   fontWeight: "700",
   letterSpacing: "0.02em",
-  wordGap: "20px",
+  wordGap: "30px",
   textColor: "#111111",
   backgroundColor: "#f6f3ea",
   fontFamily: "'Noto Sans JP', sans-serif",
