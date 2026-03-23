@@ -5,7 +5,6 @@ const phraseInput = document.getElementById("phrase");
 const previewSample = document.getElementById("preview-sample");
 const pattern = document.getElementById("pattern");
 const backButton = document.getElementById("back-button");
-const displayHeader = document.querySelector(".display-header");
 
 const controls = {
   fontSize: document.getElementById("font-size"),
@@ -73,35 +72,82 @@ function syncStateFromControls() {
   updatePreview();
 }
 
+function measurePatternCell(phrase) {
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+  const computedPatternStyle = window.getComputedStyle(pattern);
+  const font = [
+    computedPatternStyle.fontStyle,
+    computedPatternStyle.fontVariant,
+    computedPatternStyle.fontWeight,
+    computedPatternStyle.fontSize,
+    computedPatternStyle.fontFamily,
+  ].join(" ");
+
+  context.font = font;
+
+  const metrics = context.measureText(phrase);
+  const width = Math.ceil(metrics.width);
+  const height = Math.ceil(Number(controls.fontSize.value) * 0.92);
+
+  return { width, height };
+}
+
 function createPatternItems(phrase) {
   pattern.innerHTML = "";
 
-  const fontSize = Number(controls.fontSize.value);
-  const gap = Math.max(Number(controls.wordGap.value), 8);
-  const phraseWidthFactor = phrase.length <= 2 ? 1.6 : 1.2;
-  const estimatedItemWidth = Math.max(fontSize * (phrase.length * phraseWidthFactor), 120);
-  const estimatedItemHeight = Math.max(fontSize * 1.15, 48);
-  const horizontalUnit = estimatedItemWidth + gap;
-  const verticalUnit = estimatedItemHeight + gap;
-  const availableWidth = Math.max(pattern.clientWidth - 40, 1);
-  const availableHeight = Math.max(
-    window.innerHeight - displayHeader.getBoundingClientRect().height - 40,
-    1
-  );
-  const columns = Math.max(Math.floor((availableWidth + gap) / horizontalUnit), 1);
-  const rows = Math.max(Math.floor((availableHeight + gap) / verticalUnit), 1);
-  const count = columns * rows;
-
-  pattern.style.setProperty("--pattern-columns", String(columns));
-  pattern.style.setProperty("--pattern-rows", String(rows));
-  pattern.style.setProperty("--pattern-gap", `${gap}px`);
-
   const fragment = document.createDocumentFragment();
+  const gap = Number(controls.wordGap.value);
+  const { width: cellWidth, height: cellHeight } = measurePatternCell(phrase);
+  const stepX = Math.max(cellWidth + gap, 1);
+  const stepY = Math.max(cellHeight + gap, 1);
+  const columns = Math.max(Math.ceil(pattern.clientWidth / stepX) + 1, 1);
+  const rows = Math.max(Math.ceil(pattern.clientHeight / stepY) + 1, 1);
+  const patternRect = pattern.getBoundingClientRect();
+  const buttonRect = backButton.getBoundingClientRect();
+  const exclusionRect = {
+    left: buttonRect.left - patternRect.left - 4,
+    top: buttonRect.top - patternRect.top - 4,
+    right: buttonRect.right - patternRect.left + 4,
+    bottom: buttonRect.bottom - patternRect.top + 4,
+  };
 
-  for (let index = 0; index < count; index += 1) {
+  function overlapsButton(x, y) {
+    const right = x + cellWidth;
+    const bottom = y + cellHeight;
+
+    return !(
+      right <= exclusionRect.left ||
+      x >= exclusionRect.right ||
+      bottom <= exclusionRect.top ||
+      y >= exclusionRect.bottom
+    );
+  }
+
+  for (let row = 0; row < rows; row += 1) {
+    for (let column = 0; column < columns; column += 1) {
+      const x = column * stepX;
+      const y = row * stepY;
+
+      if (overlapsButton(x, y)) {
+        continue;
+      }
+
+      const item = document.createElement("p");
+      item.className = "pattern__item";
+      item.textContent = phrase;
+      item.style.left = `${x}px`;
+      item.style.top = `${y}px`;
+      fragment.appendChild(item);
+    }
+  }
+
+  if (!fragment.childNodes.length) {
     const item = document.createElement("p");
     item.className = "pattern__item";
     item.textContent = phrase;
+    item.style.left = "0";
+    item.style.top = "0";
     fragment.appendChild(item);
   }
 
