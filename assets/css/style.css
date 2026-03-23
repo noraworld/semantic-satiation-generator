@@ -217,7 +217,7 @@ output {
   position: fixed;
   top: 20px;
   right: 20px;
-  z-index: 3;
+  z-index: 2;
   appearance: none;
   border: 0;
   border-radius: 999px;
@@ -229,24 +229,24 @@ output {
 }
 
 .pattern {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--font-size) * 2.2), 1fr));
+  align-items: center;
+  gap: calc(var(--word-gap) * 0.7);
   min-height: 100vh;
-  padding: 112px 40px 40px 40px;
-  overflow: hidden;
+  padding: 32px;
 }
 
-.pattern__text {
+.pattern__item {
   margin: 0;
-  min-height: 100vh;
   font-family: var(--font-family);
   font-size: var(--font-size);
   font-weight: var(--font-weight);
   letter-spacing: var(--letter-spacing);
-  word-spacing: var(--word-gap);
   color: var(--text);
   line-height: 0.92;
-  white-space: normal;
-  word-break: keep-all;
-  overflow-wrap: anywhere;
+  text-align: center;
+  white-space: nowrap;
 }
 
 @media (max-width: 760px) {
@@ -260,7 +260,8 @@ output {
   }
 
   .pattern {
-    padding: 76px 16px 24px;
+    grid-template-columns: repeat(auto-fit, minmax(calc(var(--font-size) * 1.8), 1fr));
+    padding: 72px 16px 24px;
   }
 
   .floating-button {
