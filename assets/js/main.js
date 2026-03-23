@@ -108,35 +108,11 @@ function createPatternItems(phrase) {
     columns > 1 ? (availableWidth - cellWidth * columns) / (columns - 1) : 0;
   const gapY =
     rows > 1 ? (availableHeight - cellHeight * rows) / (rows - 1) : 0;
-  const patternRect = pattern.getBoundingClientRect();
-  const buttonRect = backButton.getBoundingClientRect();
-  const exclusionRect = {
-    left: buttonRect.left - patternRect.left - 4,
-    top: buttonRect.top - patternRect.top - 4,
-    right: buttonRect.right - patternRect.left + 4,
-    bottom: buttonRect.bottom - patternRect.top + 4,
-  };
-
-  function overlapsButton(x, y) {
-    const right = x + cellWidth;
-    const bottom = y + cellHeight;
-
-    return !(
-      right <= exclusionRect.left ||
-      x >= exclusionRect.right ||
-      bottom <= exclusionRect.top ||
-      y >= exclusionRect.bottom
-    );
-  }
 
   for (let row = 0; row < rows; row += 1) {
     for (let column = 0; column < columns; column += 1) {
       const x = column * (cellWidth + gapX);
       const y = row * (cellHeight + gapY);
-
-      if (overlapsButton(x, y)) {
-        continue;
-      }
 
       const item = document.createElement("p");
       item.className = "pattern__item";

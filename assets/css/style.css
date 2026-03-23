@@ -221,19 +221,20 @@ output {
   position: absolute;
   top: 8px;
   right: 8px;
-  z-index: 2;
+  z-index: 3;
   appearance: none;
   border: 0;
   border-radius: 999px;
   width: 40px;
   height: 40px;
   padding: 0;
-  background: rgba(17, 17, 17, 0.68);
+  background: rgba(17, 17, 17, 0.88);
   color: #fff;
   cursor: pointer;
   backdrop-filter: blur(10px);
   font-size: 1.35rem;
   line-height: 1;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
 }
 
 .pattern {
