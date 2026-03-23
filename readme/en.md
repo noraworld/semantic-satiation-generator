@@ -21,4 +21,4 @@ Live site: https://noraworld.github.io/semantic-satiation-generator/
 
 ## License
 
-See `LICENSE` in the repository root.
+See [LICENSE](https://github.com/noraworld/semantic-satiation-generator/blob/main/LICENSE) in the repository root.

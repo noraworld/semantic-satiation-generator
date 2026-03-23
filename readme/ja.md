@@ -21,4 +21,4 @@ Semantic Satiation Generator は、同じ単語や短いフレーズを画面い
 
 ## ライセンス
 
-リポジトリルートの `LICENSE` を参照してください。
+リポジトリルートの [LICENSE](https://github.com/noraworld/semantic-satiation-generator/blob/main/LICENSE) を参照してください。
