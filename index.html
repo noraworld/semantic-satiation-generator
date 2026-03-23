@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,21 +16,31 @@
     <main class="app-shell">
       <section class="panel panel-form is-active" data-screen="form">
         <div class="panel__content">
+          <div class="panel__topbar">
+            <label class="locale-switcher">
+              <span class="locale-switcher__label" data-i18n="languageLabel">Language</span>
+              <select id="locale-select" aria-label="Language">
+                <option value="en">English</option>
+                <option value="ja">日本語</option>
+              </select>
+            </label>
+          </div>
           <p class="eyebrow">Semantic Satiation Generator</p>
-          <h1>入力した言葉で画面を埋める</h1>
-          <p class="intro">
-            単語や短いフレーズを入力して、表示の密度や雰囲気を調整してから、画面全体を同じ言葉で満たします。
+          <h1 data-i18n="title">Fill the screen with your words</h1>
+          <p class="intro" data-i18n="intro">
+            Type a word or short phrase, adjust the look and density, then fill the entire screen with the same text.
           </p>
 
           <form class="controls" id="generator-form">
             <label class="field field-text">
-              <span class="field__label">文字列</span>
+              <span class="field__label" data-i18n="phraseLabel">Text</span>
               <input
                 id="phrase"
                 name="phrase"
                 type="text"
                 maxlength="40"
-                placeholder="例: はな"
+                placeholder="Example: flower"
+                data-i18n-placeholder="phrasePlaceholder"
                 autocomplete="off"
                 required
               />
@@ -39,7 +49,7 @@
             <div class="controls-grid">
               <label class="field">
                 <span class="field__row">
-                  <span class="field__label">文字サイズ</span>
+                  <span class="field__label" data-i18n="fontSizeLabel">Font Size</span>
                   <output id="font-size-value" for="font-size">56px</output>
                 </span>
                 <input id="font-size" name="font-size" type="range" min="24" max="160" value="56" />
@@ -47,7 +57,7 @@
 
               <label class="field">
                 <span class="field__row">
-                  <span class="field__label">文字の太さ</span>
+                  <span class="field__label" data-i18n="fontWeightLabel">Font Weight</span>
                   <output id="font-weight-value" for="font-weight">700</output>
                 </span>
                 <input id="font-weight" name="font-weight" type="range" min="300" max="900" step="100" value="700" />
@@ -55,7 +65,7 @@
 
               <label class="field">
                 <span class="field__row">
-                  <span class="field__label">文字間隔</span>
+                  <span class="field__label" data-i18n="letterSpacingLabel">Letter Spacing</span>
                   <output id="letter-spacing-value" for="letter-spacing">0.02em</output>
                 </span>
                 <input id="letter-spacing" name="letter-spacing" type="range" min="-8" max="40" value="2" />
@@ -63,7 +73,7 @@
 
               <label class="field">
                 <span class="field__row">
-                  <span class="field__label">文字列の間隔</span>
+                  <span class="field__label" data-i18n="wordGapLabel">Text Spacing</span>
                   <output id="word-gap-value" for="word-gap">20px</output>
                 </span>
                 <input id="word-gap" name="word-gap" type="range" min="0" max="72" value="20" />
@@ -72,17 +82,17 @@
 
             <div class="controls-grid controls-grid--compact">
               <label class="field">
-                <span class="field__label">文字色</span>
+                <span class="field__label" data-i18n="textColorLabel">Text Color</span>
                 <input id="text-color" name="text-color" type="color" value="#111111" />
               </label>
 
               <label class="field">
-                <span class="field__label">背景色</span>
+                <span class="field__label" data-i18n="backgroundColorLabel">Background Color</span>
                 <input id="background-color" name="background-color" type="color" value="#f6f3ea" />
               </label>
 
               <label class="field">
-                <span class="field__label">フォント</span>
+                <span class="field__label" data-i18n="fontFamilyLabel">Font</span>
                 <select id="font-family" name="font-family">
                   <option value="'Noto Sans JP', sans-serif">Noto Sans JP</option>
                   <option value="'M PLUS Rounded 1c', sans-serif">M PLUS Rounded 1c</option>
@@ -93,19 +103,19 @@
             </div>
 
             <div class="preview-card" id="preview-card">
-              <p class="preview-card__label">プレビュー</p>
+              <p class="preview-card__label" data-i18n="previewLabel">Preview</p>
               <div class="preview-card__sample" id="preview-sample">はな はな はな</div>
             </div>
 
             <div class="actions">
-              <button class="button button-primary" type="submit">画面いっぱいに表示</button>
+              <button class="button button-primary" type="submit" data-i18n="submitLabel">Fill the Screen</button>
             </div>
           </form>
         </div>
       </section>
 
       <section class="panel panel-display" data-screen="display" aria-hidden="true">
-        <button class="floating-button" id="back-button" type="button" aria-label="入力画面に戻る">
+        <button class="floating-button" id="back-button" type="button" aria-label="Back to input screen">
           ×
         </button>
         <div class="pattern" id="pattern" aria-live="polite"></div>

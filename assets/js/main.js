@@ -5,6 +5,50 @@ const phraseInput = document.getElementById("phrase");
 const previewSample = document.getElementById("preview-sample");
 const pattern = document.getElementById("pattern");
 const backButton = document.getElementById("back-button");
+const localeSelect = document.getElementById("locale-select");
+
+const translations = {
+  en: {
+    languageLabel: "Language",
+    title: "Fill the screen with your words",
+    intro:
+      "Type a word or short phrase, adjust the look and density, then fill the entire screen with the same text.",
+    phraseLabel: "Text",
+    phrasePlaceholder: "Example: flower",
+    fontSizeLabel: "Font Size",
+    fontWeightLabel: "Font Weight",
+    letterSpacingLabel: "Letter Spacing",
+    wordGapLabel: "Text Spacing",
+    textColorLabel: "Text Color",
+    backgroundColorLabel: "Background Color",
+    fontFamilyLabel: "Font",
+    previewLabel: "Preview",
+    submitLabel: "Fill the Screen",
+    backButtonLabel: "Back to input screen",
+    previewFallback: "flower",
+  },
+  ja: {
+    languageLabel: "言語",
+    title: "入力した言葉で画面を埋める",
+    intro:
+      "単語や短いフレーズを入力して、表示の密度や雰囲気を調整してから、画面全体を同じ言葉で満たします。",
+    phraseLabel: "文字列",
+    phrasePlaceholder: "例: はな",
+    fontSizeLabel: "文字サイズ",
+    fontWeightLabel: "文字の太さ",
+    letterSpacingLabel: "文字間隔",
+    wordGapLabel: "文字列の間隔",
+    textColorLabel: "文字色",
+    backgroundColorLabel: "背景色",
+    fontFamilyLabel: "フォント",
+    previewLabel: "プレビュー",
+    submitLabel: "画面いっぱいに表示",
+    backButtonLabel: "入力画面に戻る",
+    previewFallback: "はな",
+  },
+};
+
+let currentLocale = "en";
 
 const controls = {
   fontSize: document.getElementById("font-size"),
@@ -51,8 +95,35 @@ function applyCustomProperties() {
   root.style.setProperty("--font-family", styleState.fontFamily);
 }
 
+function translate(key) {
+  return translations[currentLocale][key];
+}
+
+function detectLocale() {
+  const browserLocale = navigator.language?.toLowerCase() || "en";
+  return browserLocale.startsWith("ja") ? "ja" : "en";
+}
+
+function applyLocale(locale) {
+  currentLocale = translations[locale] ? locale : "en";
+  document.documentElement.lang = currentLocale;
+  localeSelect.value = currentLocale;
+
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    element.textContent = translate(element.dataset.i18n);
+  });
+
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
+    element.setAttribute("placeholder", translate(element.dataset.i18nPlaceholder));
+  });
+
+  backButton.setAttribute("aria-label", translate("backButtonLabel"));
+  localeSelect.setAttribute("aria-label", translate("languageLabel"));
+  updatePreview();
+}
+
 function updatePreview() {
-  const phrase = phraseInput.value.trim() || "はな";
+  const phrase = phraseInput.value.trim() || translate("previewFallback");
   previewSample.textContent = `${phrase} ${phrase} ${phrase}`;
   previewSample.style.color = styleState.textColor;
   previewSample.style.backgroundColor = styleState.backgroundColor;
@@ -162,6 +233,9 @@ backButton.addEventListener("click", () => {
 });
 
 phraseInput.addEventListener("input", updatePreview);
+localeSelect.addEventListener("change", (event) => {
+  applyLocale(event.target.value);
+});
 
 Object.values(controls).forEach((control) => {
   control.addEventListener("input", syncStateFromControls);
@@ -185,4 +259,5 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+applyLocale(detectLocale());
 syncStateFromControls();
