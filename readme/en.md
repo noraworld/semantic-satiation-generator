@@ -1,6 +1,6 @@
 # Semantic Satiation Generator
 
-[日本語 README](./ja.md)
+[日本語 README](https://github.com/noraworld/semantic-satiation-generator/blob/main/readme/ja.md)
 
 Semantic Satiation Generator is a simple static site for quickly experiencing semantic satiation by filling the screen with the same word or phrase over and over.
 
@@ -8,7 +8,7 @@ Live site: https://noraworld.github.io/semantic-satiation-generator/
 
 ## Demo
 
-![English demo screenshot](../screenshots/demo_en.png)
+![English demo screenshot](https://raw.githubusercontent.com/noraworld/semantic-satiation-generator/main/screenshots/demo_en.png)
 
 ## Features
 

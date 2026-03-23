@@ -1,6 +1,6 @@
 # Semantic Satiation Generator
 
-[English README](./en.md)
+[English README](https://github.com/noraworld/semantic-satiation-generator/blob/main/readme/en.md)
 
 Semantic Satiation Generator は、同じ単語や短いフレーズを画面いっぱいに繰り返し表示することで、意味飽和を手軽に体験できるシンプルな静的サイトです。
 
@@ -8,7 +8,7 @@ Semantic Satiation Generator は、同じ単語や短いフレーズを画面い
 
 ## デモ
 
-![日本語デモのスクリーンショット](../screenshots/demo_ja.png)
+![日本語デモのスクリーンショット](https://raw.githubusercontent.com/noraworld/semantic-satiation-generator/main/screenshots/demo_ja.png)
 
 ## 機能
 
