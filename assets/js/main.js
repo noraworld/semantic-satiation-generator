@@ -75,22 +75,18 @@ function syncStateFromControls() {
 function createPatternItems(phrase) {
   pattern.innerHTML = "";
 
-  const estimatedItemWidth = Math.max(Number(controls.fontSize.value) * (phrase.length + 1.4), 120);
-  const columns = Math.max(Math.floor(window.innerWidth / estimatedItemWidth), 1);
-  const rowHeight = Number(controls.fontSize.value) * 1.2 + Number(controls.wordGap.value) * 0.7;
-  const rows = Math.max(Math.ceil(window.innerHeight / Math.max(rowHeight, 1)) + 2, 6);
-  const count = columns * rows;
+  const fontSize = Number(controls.fontSize.value);
+  const gap = Number(controls.wordGap.value);
+  const estimatedPhraseWidth = Math.max(fontSize * (phrase.length * 0.9 + 0.9) + gap, 120);
+  const estimatedRowHeight = Math.max(fontSize * 0.98, 1);
+  const viewportArea = window.innerWidth * window.innerHeight;
+  const estimatedAreaPerPhrase = estimatedPhraseWidth * estimatedRowHeight;
+  const repetitionCount = Math.max(Math.ceil((viewportArea / estimatedAreaPerPhrase) * 4), 80);
 
-  const fragment = document.createDocumentFragment();
-
-  for (let index = 0; index < count; index += 1) {
-    const item = document.createElement("p");
-    item.className = "pattern__item";
-    item.textContent = phrase;
-    fragment.appendChild(item);
-  }
-
-  pattern.appendChild(fragment);
+  const block = document.createElement("p");
+  block.className = "pattern__text";
+  block.textContent = Array.from({ length: repetitionCount }, () => phrase).join(" ");
+  pattern.appendChild(block);
 }
 
 function showScreen(target) {
