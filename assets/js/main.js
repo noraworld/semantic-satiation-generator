@@ -55,7 +55,7 @@ function updatePreview() {
   const phrase = phraseInput.value.trim() || "はな";
   previewSample.textContent = `${phrase} ${phrase} ${phrase}`;
   previewSample.style.color = styleState.textColor;
-  previewSample.style.backgroundColor = "transparent";
+  previewSample.style.backgroundColor = styleState.backgroundColor;
 }
 
 function syncStateFromControls() {
