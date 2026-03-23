@@ -13,6 +13,9 @@ const translations = {
     title: "Fill the screen with your words",
     intro:
       "Type a word or short phrase, adjust the look and density, then fill the entire screen with the same text.",
+    aboutTitle: "What is semantic satiation?",
+    aboutBody:
+      "Semantic satiation is the effect where a word temporarily feels unfamiliar or loses its meaning when you repeat it many times. This page helps you experience that sensation quickly by filling the screen with the same text.",
     phraseLabel: "Text",
     phrasePlaceholder: "Example: flower",
     fontSizeLabel: "Font Size",
@@ -32,6 +35,9 @@ const translations = {
     title: "入力した言葉で画面を埋める",
     intro:
       "単語や短いフレーズを入力して、表示の密度や雰囲気を調整してから、画面全体を同じ言葉で満たします。",
+    aboutTitle: "意味飽和とは？",
+    aboutBody:
+      "意味飽和とは、同じ単語を何度も繰り返して見たり聞いたりすることで、その言葉が一時的に見慣れないものに感じられたり、意味が薄れて感じられたりする現象です。このページでは、同じ文字列で画面を埋めることで、その感覚を手早く体験できます。",
     phraseLabel: "文字列",
     phrasePlaceholder: "例: はな",
     fontSizeLabel: "文字サイズ",
