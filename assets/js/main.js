@@ -92,12 +92,22 @@ function createPatternItems(phrase) {
   pattern.innerHTML = "";
 
   const fragment = document.createDocumentFragment();
-  const gap = Number(controls.wordGap.value);
+  const minimumGap = Number(controls.wordGap.value);
   const { width: cellWidth, height: cellHeight } = measurePatternCell(phrase);
-  const stepX = Math.max(cellWidth + gap, 1);
-  const stepY = Math.max(cellHeight + gap, 1);
-  const columns = Math.max(Math.ceil(pattern.clientWidth / stepX) + 1, 1);
-  const rows = Math.max(Math.ceil(pattern.clientHeight / stepY) + 1, 1);
+  const availableWidth = Math.max(pattern.clientWidth, cellWidth);
+  const availableHeight = Math.max(pattern.clientHeight, cellHeight);
+  const columns = Math.max(
+    Math.floor((availableWidth + minimumGap) / Math.max(cellWidth + minimumGap, 1)),
+    1
+  );
+  const rows = Math.max(
+    Math.floor((availableHeight + minimumGap) / Math.max(cellHeight + minimumGap, 1)),
+    1
+  );
+  const gapX =
+    columns > 1 ? (availableWidth - cellWidth * columns) / (columns - 1) : 0;
+  const gapY =
+    rows > 1 ? (availableHeight - cellHeight * rows) / (rows - 1) : 0;
   const patternRect = pattern.getBoundingClientRect();
   const buttonRect = backButton.getBoundingClientRect();
   const exclusionRect = {
@@ -121,8 +131,8 @@ function createPatternItems(phrase) {
 
   for (let row = 0; row < rows; row += 1) {
     for (let column = 0; column < columns; column += 1) {
-      const x = column * stepX;
-      const y = row * stepY;
+      const x = column * (cellWidth + gapX);
+      const y = row * (cellHeight + gapY);
 
       if (overlapsButton(x, y)) {
         continue;
