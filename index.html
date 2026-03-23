@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semantic Satiation Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DotGothic16&family=M+PLUS+Rounded+1c:wght@400;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="panel panel-form is-active" data-screen="form">
+        <div class="panel__content">
+          <p class="eyebrow">Semantic Satiation Generator</p>
+          <h1>入力した言葉で画面を埋める</h1>
+          <p class="intro">
+            単語や短いフレーズを入力して、表示の密度や雰囲気を調整してから、画面全体を同じ言葉で満たします。
+          </p>
+
+          <form class="controls" id="generator-form">
+            <label class="field field-text">
+              <span class="field__label">文字列</span>
+              <input
+                id="phrase"
+                name="phrase"
+                type="text"
+                maxlength="40"
+                placeholder="例: はな"
+                autocomplete="off"
+                required
+              />
+            </label>
+
+            <div class="controls-grid">
+              <label class="field">
+                <span class="field__row">
+                  <span class="field__label">文字サイズ</span>
+                  <output id="font-size-value" for="font-size">56px</output>
+                </span>
+                <input id="font-size" name="font-size" type="range" min="24" max="160" value="56" />
+              </label>
+
+              <label class="field">
+                <span class="field__row">
+                  <span class="field__label">文字の太さ</span>
+                  <output id="font-weight-value" for="font-weight">700</output>
+                </span>
+                <input id="font-weight" name="font-weight" type="range" min="300" max="900" step="100" value="700" />
+              </label>
+
+              <label class="field">
+                <span class="field__row">
+                  <span class="field__label">文字間隔</span>
+                  <output id="letter-spacing-value" for="letter-spacing">0.02em</output>
+                </span>
+                <input id="letter-spacing" name="letter-spacing" type="range" min="-8" max="40" value="2" />
+              </label>
+
+              <label class="field">
+                <span class="field__row">
+                  <span class="field__label">文字列の間隔</span>
+                  <output id="word-gap-value" for="word-gap">20px</output>
+                </span>
+                <input id="word-gap" name="word-gap" type="range" min="0" max="72" value="20" />
+              </label>
+            </div>
+
+            <div class="controls-grid controls-grid--compact">
+              <label class="field">
+                <span class="field__label">文字色</span>
+                <input id="text-color" name="text-color" type="color" value="#111111" />
+              </label>
+
+              <label class="field">
+                <span class="field__label">背景色</span>
+                <input id="background-color" name="background-color" type="color" value="#f6f3ea" />
+              </label>
+
+              <label class="field">
+                <span class="field__label">フォント</span>
+                <select id="font-family" name="font-family">
+                  <option value="'Noto Sans JP', sans-serif">Noto Sans JP</option>
+                  <option value="'M PLUS Rounded 1c', sans-serif">M PLUS Rounded 1c</option>
+                  <option value="'Shippori Mincho', serif">Shippori Mincho</option>
+                  <option value="'DotGothic16', sans-serif">DotGothic16</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="preview-card" id="preview-card">
+              <p class="preview-card__label">プレビュー</p>
+              <div class="preview-card__sample" id="preview-sample">はな はな はな</div>
+            </div>
+
+            <div class="actions">
+              <button class="button button-primary" type="submit">画面いっぱいに表示</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="panel panel-display" data-screen="display" aria-hidden="true">
+        <button class="floating-button" id="back-button" type="button">戻る</button>
+        <div class="pattern" id="pattern" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <script src="./assets/js/main.js"></script>
+  </body>
+</html>
